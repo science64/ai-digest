@@ -42,11 +42,19 @@ function displayIncludedFiles(includedFiles: string[]): void {
   });
 }
 
+<<<<<<< HEAD
 async function aggregateFiles(inputDir: string, outputFile: string, useDefaultIgnores: boolean, removeWhitespaceFlag: boolean, showOutputFiles: boolean, additionalIgnores: string[]): Promise<void> {
   try {
     const userIgnorePatterns = await readIgnoreFile(inputDir);
     const defaultIgnore = useDefaultIgnores ? ignore().add(DEFAULT_IGNORES) : ignore();
     const customIgnore = createIgnoreFilter([...userIgnorePatterns, ...additionalIgnores]);
+=======
+async function aggregateFiles(inputDir: string, outputFile: string, useDefaultIgnores: boolean, removeWhitespaceFlag: boolean, showOutputFiles: boolean): Promise<void> {
+  try {
+    const userIgnorePatterns = await readIgnoreFile(inputDir);
+    const defaultIgnore = useDefaultIgnores ? ignore().add(DEFAULT_IGNORES) : ignore();
+    const customIgnore = createIgnoreFilter(userIgnorePatterns);
+>>>>>>> 15b0205d484f55d60f37a0dce2c7e406483caa90
 
     if (useDefaultIgnores) {
       console.log(formatLog('Using default ignore patterns.', '🚫'));
@@ -54,6 +62,7 @@ async function aggregateFiles(inputDir: string, outputFile: string, useDefaultIg
       console.log(formatLog('Default ignore patterns disabled.', '✅'));
     }
 
+<<<<<<< HEAD
     if (additionalIgnores.length > 0) {
       console.log(formatLog('Additional ignore patterns:', '🚫'));
       additionalIgnores.forEach((pattern) => {
@@ -61,6 +70,8 @@ async function aggregateFiles(inputDir: string, outputFile: string, useDefaultIg
       });
     }
 
+=======
+>>>>>>> 15b0205d484f55d60f37a0dce2c7e406483caa90
     if (removeWhitespaceFlag) {
       console.log(formatLog('Whitespace removal enabled (except for whitespace-dependent languages).', '🧹'));
     } else {
@@ -140,7 +151,11 @@ async function aggregateFiles(inputDir: string, outputFile: string, useDefaultIg
       console.log(formatLog(`Files ignored by default patterns: ${defaultIgnoredCount}`, '🚫'));
     }
     if (customIgnoredCount > 0) {
+<<<<<<< HEAD
       console.log(formatLog(`Files ignored by .aidigestignore and additional patterns: ${customIgnoredCount}`, '🚫'));
+=======
+      console.log(formatLog(`Files ignored by .aidigestignore: ${customIgnoredCount}`, '🚫'));
+>>>>>>> 15b0205d484f55d60f37a0dce2c7e406483caa90
     }
     console.log(formatLog(`Binary and SVG files included: ${binaryAndSvgFileCount}`, '📦'));
 
@@ -173,11 +188,18 @@ program
   .option('--no-default-ignores', 'Disable default ignore patterns')
   .option('--whitespace-removal', 'Enable whitespace removal')
   .option('--show-output-files', 'Display a list of files included in the output')
+<<<<<<< HEAD
   .option('--ignore <patterns...>', 'Additional patterns to ignore (can be used multiple times)')
   .action(async (options) => {
     const inputDir = path.resolve(options.input);
     const outputFile = path.isAbsolute(options.output) ? options.output : path.join(process.cwd(), options.output);
     await aggregateFiles(inputDir, outputFile, options.defaultIgnores, options.whitespaceRemoval, options.showOutputFiles, options.ignore || []);
+=======
+  .action(async (options) => {
+    const inputDir = path.resolve(options.input);
+    const outputFile = path.isAbsolute(options.output) ? options.output : path.join(process.cwd(), options.output);
+    await aggregateFiles(inputDir, outputFile, options.defaultIgnores, options.whitespaceRemoval, options.showOutputFiles);
+>>>>>>> 15b0205d484f55d60f37a0dce2c7e406483caa90
   });
 
 program.parse(process.argv);
