@@ -39,6 +39,7 @@ For best results, re-upload the Markdown file before starting a new chat session
 - `--whitespace-removal`: Enable whitespace removal
 - `--show-output-files`: Display a list of files included in the output
 - `--help`: Show help
+- `--ignore`: Ignore files that is not included in `codebase.md` file.
 
 ## Examples
 
@@ -70,6 +71,18 @@ For best results, re-upload the Markdown file before starting a new chat session
 
    ```bash
    npx ai-digest -i /path/to/your/project -o project_summary.md --whitespace-removal --show-output-files
+   ```
+
+6. Ignore single file:
+
+   ```bash
+   npx ai-digest --ignore devfiles.js 
+   ```
+
+7. Ignore all files with this certain extention:
+
+   ```bash
+   npx ai-digest --ignore *.json 
    ```
 
 ## Custom Ignore Patterns
